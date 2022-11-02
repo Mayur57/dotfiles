@@ -24,11 +24,11 @@ printf "────────────────────────
 # Show hidden dotfiles in finder
 printf "\n${MAGENTA}Showing hidden files to be visible finder${NORMAL}\n"
 printf "${WHITE}Note: This will reload Finder.${NORMAL}\n"
-# eval "defaults write com.apple.finder AppleShowAllFiles YES"
-# eval "killall Finder"
+eval "defaults write com.apple.finder AppleShowAllFiles YES"
+eval "killall Finder"
 
 printf "\n${MAGENTA}Enabling auto-hide Dock${NORMAL}\n"
-# eval "defaults write com.apple.dock autohide -bool true && killall Dock"
+eval "defaults write com.apple.dock autohide -bool true && killall Dock"
 
 printf "${BLUE}\n─────────────────────────────────────────────"
 printf "\n─→ PART TWO: Development Tools\n"
@@ -36,11 +36,11 @@ printf "────────────────────────
 
 # Install XCode Command Line Tools
 printf "\n${MAGENTA}Installing Xcode Command Line Tools${NORMAL}\n"
-# eval "xcode-select --install"
+eval "xcode-select --install"
 
 # Install Homebrew for easier macOS package management
 printf "\n${MAGENTA}Installing Homebrew${NORMAL}\n"
-# eval '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+eval '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
 
 # If this is an M1 mac
 if [[ `uname -m` == 'arm64' ]]; then
@@ -51,25 +51,25 @@ fi
 
 # Install Yarn for easier (and faster) Node.js dependency management
 printf "\n${MAGENTA}Installing Yarn for Node package management${NORMAL}\n"
-# eval "brew install yarn --ignore-dependencies"
+eval "brew install yarn --ignore-dependencies"
 
 # Install Oh My Zsh
 printf "\n${MAGENTA}Installing Oh My zsh${NORMAL}\n"
-# eval "sh -c '$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)'"
+eval "sh -c '$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)'"
 
 # Copy ZSH config
-# printf "${YELLOW}Copying ZSH config into ~/.zshrc...${NORMAL}\n"
-# eval "cp ./zshrc ~/.zshrc"
+printf "${MAGENTA}Copying ZSH config into ~/.zshrc${NORMAL}\n"
+eval "cp ./zshrc ~/.zshrc"
 
 # Install NVM
 printf "\n${MAGENTA}Installing Node Version Manager (nvm)${NORMAL}\n"
-# eval "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash"
-# eval "source ~/.zshrc"
-# eval "nvm install --lts"
+eval "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash"
+eval "source ~/.zshrc"
+eval "nvm install --lts"
 
 # Install brew casks
 printf "\n${MAGENTA}Installing other brew casks${NORMAL}\n"
-# eval "brew install gh"
+eval "brew install gh"
 
 # All the applications that cannot be installed using Homebrew casks.
 printf "${BLUE}\n─────────────────────────────────────────────"
