@@ -159,3 +159,18 @@ fi
 
 # for signing github commits
 export GPG_TTY=$(tty)
+
+# New Directory - Makes new directory and goes inside it
+nd() {
+	mkdir -p -- "$1" && cd -P -- "$1"
+}
+
+# New Directory Code - Makes new directory and goes inside it using VS Code
+ndc() {
+	mkdir -p -- "$1" && cd -P -- "$1" && code .
+}
+
+# Remote Commit - Stage, Commit and Push git changes to remote with a message
+grc() {
+	git add . && git commit -m "$1" && git push
+}
