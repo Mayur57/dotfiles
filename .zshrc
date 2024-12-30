@@ -79,34 +79,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 alias zshconfig="code ~/.zshrc"
-alias subl="open -a 'Sublime Text'"
 alias npmplease="rm -rf node_modules/ && rm -f package-lock.json && npm install"
 alias yarnplease="rm -rf node_modules/ && rm yarn.lock && yarn"
 alias gsc="git stash clear"
@@ -174,3 +147,20 @@ ndc() {
 grc() {
 	git add . && git commit -m "$1" && git push
 }
+
+# Fetch Advent of Code input for today - aocin 2024 12
+aocin() {
+    curl -b "session=$AOC_SESSION_TOKEN" https://adventofcode.com/2023/day/$1/input -o in.dat
+}
+
+# Run C++ file
+cpp() {
+  g++-14 -o $1 "$1.cpp" && ./$1
+}
+
+# bun completions
+[ -s "/Users/mayur/.bun/_bun" ] && source "/Users/mayur/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
