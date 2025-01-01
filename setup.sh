@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Exit immediately at script failure point
 set -euo pipefail
@@ -83,18 +83,24 @@ fi
 
 log_message "${COLOR_GREEN}" "Downloading and setting up applications..."
 mkdir -p ~/Desktop/Applications
+
+postman_url=$([[ "${SYSTEM_ARCH}" == "arm64" ]] && echo "https://dl.pstmn.io/download/latest/osx_arm64" || echo "https://dl.pstmn.io/download/latest/osx_64")
+notion_url=$([[ "${SYSTEM_ARCH}" == "arm64" ]] && echo "https://www.notion.so/desktop/apple-silicon/download" || echo "https://www.notion.so/desktop/mac/download")
+vscode_url=$([[ "${SYSTEM_ARCH}" == "arm64" ]] && echo "https://code.visualstudio.com/sha/download?build=stable&os=darwin-arm64" || echo "https://code.visualstudio.com/sha/download?build=stable&os=darwin")
+
 declare -A APPLICATIONS_URLS=(
     ["Rectangle"]="https://github.com/rxhanson/Rectangle/releases/download/v0.61/Rectangle0.61.dmg"
     ["iTerm2"]="https://iterm2.com/downloads/stable/latest"
-    ["Postman"]=$([[ ${SYSTEM_ARCH} == "arm64" ]] && echo "https://dl.pstmn.io/download/latest/osx_arm64" || echo "https://dl.pstmn.io/download/latest/osx_64")
-    ["Notion"]=$([[ ${SYSTEM_ARCH} == "arm64" ]] && echo "https://www.notion.so/desktop/apple-silicon/download" || echo "https://www.notion.so/desktop/mac/download")
-    ["Visual Studio Code"]=$([[ ${SYSTEM_ARCH} == "arm64" ]] && echo "https://code.visualstudio.com/sha/download?build=stable&os=darwin-arm64" || echo "https://code.visualstudio.com/sha/download?build=stable&os=darwin")
+    ["Postman"]="${postman_url}"
+    ["Notion"]="${notion_url}"
+    ["Visual Studio Code"]="${vscode_url}"
     ["Spotify"]="https://download.scdn.co/SpotifyInstaller.zip"
     ["Rocket"]="https://macrelease.matthewpalmer.net/Rocket.dmg"
 )
+
 for app in "${!APPLICATIONS_URLS[@]}"; do
     log_message "${COLOR_MAGENTA}" "Downloading ${app}..."
-    curl -L# "${APPLICATIONS_URLS[$app]}" -o "~/Desktop/Applications/${app}"
+    curl -L# "${APPLICATIONS_URLS[$app]}" -o "$HOME/Desktop/Applications/${app}"
 done
 
 log_message "${COLOR_GREEN}" "Installing VS Code extensions..."
